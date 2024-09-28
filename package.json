@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "tsx watch index.ts",
+    "dev": "tsx watch src/index.ts",
     "lint": "eslint .",
     "start": "node build/index.js"
   },
