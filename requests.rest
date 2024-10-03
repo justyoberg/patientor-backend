@@ -1,0 +1,11 @@
+### Valid request
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "justy",
+    "dateOfBirth": "1994-06-30",
+    "ssn": "123456789",
+    "gender": "male",
+    "occupation": "coder"
+}

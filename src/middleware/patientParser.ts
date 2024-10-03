@@ -1,7 +1,11 @@
 import newPatientSchema from '../utils';
 import { Request, Response, NextFunction } from 'express';
 
-const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
+export const newPatientParser = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
   try {
     console.log(req.body);
     newPatientSchema.parse(req.body);
