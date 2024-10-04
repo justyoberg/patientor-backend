@@ -45,13 +45,11 @@ const occupationalHealthcareSchema = z.object({
     .optional(),
 });
 
-const discriminatedTypes = z.discriminatedUnion('type', [
-  healthCheckSchema,
-  hospitalSchema,
-  occupationalHealthcareSchema,
+export const newEntrySchema = z.discriminatedUnion('type', [
+  baseEntrySchema.merge(healthCheckSchema).strict(),
+  baseEntrySchema.merge(hospitalSchema).strict(),
+  baseEntrySchema.merge(occupationalHealthcareSchema).strict(),
 ]);
-
-export const newEntrySchema = discriminatedTypes.and(baseEntrySchema);
 
 export default {
   newPatientSchema,

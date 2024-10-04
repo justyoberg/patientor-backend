@@ -27,8 +27,9 @@ router.post(
     if (patient) {
       const addedEntry = patientsService.addEntryToPatient(patient, req.body);
       res.json(addedEntry);
+    } else {
+      res.status(400).send({ error: 'No patient found with that id' });
     }
-    res.status(400).send({ error: 'No patient found with that id' });
   }
 );
 

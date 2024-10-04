@@ -3,11 +3,25 @@ POST http://localhost:3000/api/patients
 Content-Type: application/json
 
 {
-    "name": "justy",
-    "dateOfBirth": "1994-06-30",
-    "ssn": "123456789",
-    "gender": "male",
-    "occupation": "coder"
+  "name": "justy",
+  "dateOfBirth": "1994-06-30",
+  "ssn": "123456789",
+  "gender": "male",
+  "occupation": "coder"
+}
+
+### Valid entry request: Hospital
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "description": "New hospital entry",
+  "date": "2024-10-04",
+  "specialist": "MD House",
+  "diagnosisCodes": ["1337", "80085"],
+  "type": "Hospital",
+  "discharge": { "date": "1994-06-30", "criteria": "yes"},
+  
 }
 
 ### Valid entry request: HealthCheck
@@ -15,11 +29,38 @@ POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/ent
 Content-Type: application/json
 
 {
-    "description": "New healthcheck entry",
-    "date": "2024-10-04",
-    "specialist": "MD House",
-    "diagnosisCodes": ["1337", "80085"],
-    "type": "HealthCheck",
-    "healthCheckRating": 0,
-    "discharge": { "date": "1994-06-30", "criteria": "yes"}
+  "description": "New healthcheck entry",
+  "date": "2024-10-04",
+  "specialist": "MD House",
+  "diagnosisCodes": ["1337", "80085"],
+  "type": "HealthCheck",
+  "healthCheckRating": 0
+  
+}
+
+### Valid entry request: OccupationalHealthcareEntry without sickleave
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "description": "New occupational healthcare entry",
+  "date": "2024-10-04",
+  "specialist": "MD House",
+  "diagnosisCodes": ["1337", "80085"],
+  "type": "OccupationalHealthcare",
+  "employerName": "N/A"
+}
+
+### Valid entry request: OccupationalHealthcareEntry with sickleave
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "description": "New occupational healthcare entry",
+  "date": "2024-10-04",
+  "specialist": "MD House",
+  "diagnosisCodes": ["1337", "80085"],
+  "type": "OccupationalHealthcare",
+  "employerName": "N/A",
+  "sickLeave": { "startDate": "1994-05-01", "endDate": "1994-05-02"}
 }
