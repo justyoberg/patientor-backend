@@ -1,8 +1,8 @@
-import { Gender } from './types';
+import { Gender, EntryType, HealthCheckRating } from './types';
 import z from 'zod';
 
 export const newPatientSchema = z.object({
-  name: z.string().min(1, { message: 'Name must be atleast 1 character' }),
+  name: z.string().min(2, { message: 'Name must be atleast 2 characters' }),
   gender: z.nativeEnum(Gender),
   occupation: z.string(z.string()),
   ssn: z
@@ -12,4 +12,48 @@ export const newPatientSchema = z.object({
   dateOfBirth: z.string().date().optional(),
 });
 
-export default newPatientSchema;
+const baseEntrySchema = z.object({
+  description: z.string().min(1, { message: 'Description required' }),
+  date: z.string().date(),
+  specialist: z.string().min(2, { message: 'Specialist required' }),
+  diagnosisCodes: z.string().array().optional(),
+});
+
+const healthCheckSchema = z.object({
+  type: z.literal(EntryType.HealthCheck),
+  healthCheckRating: z.nativeEnum(HealthCheckRating),
+});
+
+const hospitalSchema = z.object({
+  type: z.literal(EntryType.Hospital),
+  discharge: z.object({
+    date: z.string(),
+    criteria: z.string(),
+  }),
+});
+
+const occupationalHealthcareSchema = z.object({
+  type: z.literal(EntryType.OccupationalHealthcare),
+  employerName: z
+    .string()
+    .min(2, { message: 'Employer name must be atleast 2 characters' }),
+  sickLeave: z
+    .object({
+      startDate: z.string().date(),
+      endDate: z.string().date(),
+    })
+    .optional(),
+});
+
+const discriminatedTypes = z.discriminatedUnion('type', [
+  healthCheckSchema,
+  hospitalSchema,
+  occupationalHealthcareSchema,
+]);
+
+export const newEntrySchema = discriminatedTypes.and(baseEntrySchema);
+
+export default {
+  newPatientSchema,
+  newEntrySchema,
+};

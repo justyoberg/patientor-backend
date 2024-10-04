@@ -9,3 +9,17 @@ Content-Type: application/json
     "gender": "male",
     "occupation": "coder"
 }
+
+### Valid entry request: HealthCheck
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+    "description": "New healthcheck entry",
+    "date": "2024-10-04",
+    "specialist": "MD House",
+    "diagnosisCodes": ["1337", "80085"],
+    "type": "HealthCheck",
+    "healthCheckRating": 0,
+    "discharge": { "date": "1994-06-30", "criteria": "yes"}
+}
