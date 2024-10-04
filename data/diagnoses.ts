@@ -1,3 +1,5 @@
+import { Diagnosis } from '../src/types';
+
 const data = [
   {
     code: 'M24.2',
@@ -74,6 +76,11 @@ const data = [
     name: 'Other proliferative retinopathy',
     latin: 'Alia retinopathia proliferativa',
   },
+];
+
+export const codes = data.map(d => d.code) as [
+  Diagnosis['code'],
+  ...Array<Diagnosis['code']>
 ];
 
 export default data;

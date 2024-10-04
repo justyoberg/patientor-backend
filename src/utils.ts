@@ -1,5 +1,6 @@
 import { Gender, EntryType, HealthCheckRating } from './types';
 import z from 'zod';
+import { codes } from '../data/diagnoses';
 
 export const newPatientSchema = z.object({
   name: z.string().min(2, { message: 'Name must be atleast 2 characters' }),
@@ -16,7 +17,7 @@ const baseEntrySchema = z.object({
   description: z.string().min(1, { message: 'Description required' }),
   date: z.string().date(),
   specialist: z.string().min(2, { message: 'Specialist required' }),
-  diagnosisCodes: z.string().array().optional(),
+  diagnosisCodes: z.enum(codes).array().optional(),
 });
 
 const healthCheckSchema = z.object({

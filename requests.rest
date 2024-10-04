@@ -18,9 +18,9 @@ Content-Type: application/json
   "description": "New hospital entry",
   "date": "2024-10-04",
   "specialist": "MD House",
-  "diagnosisCodes": ["1337", "80085"],
+  "diagnosisCodes": ["N30.0", "H54.7"],
   "type": "Hospital",
-  "discharge": { "date": "1994-06-30", "criteria": "yes"},
+  "discharge": { "date": "1994-06-30", "criteria": "yes"}
   
 }
 
